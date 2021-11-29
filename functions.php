@@ -68,12 +68,11 @@ function custom_submit_post() {
             'post_status' => 'publish',
             'post_author' => $userid,
             'post_type' => 'post',
+	     'meta_input'   => array(
+                    '_post_meta_1' => 'Valor 1',
+                    '_post_meta_2'   => 'Valor 2'
+              ),
         );
-        
-    $post_id = wp_insert_post( $post_information );
-    if ( $post_id ) {
-        update_post_meta( $post_id, 'info', 'informacion' ); //Para Agregar postmeta luego de la inserccion del post
-    }
     
     wp_die();
     }
