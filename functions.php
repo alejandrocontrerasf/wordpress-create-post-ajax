@@ -39,7 +39,7 @@ $form = "<div class='uk-container uk-container-xsmall uk-margin'>
        </div>
    </div>
 
-	<div class='error_msg2' style='display: none'></div>
+	<div class='error_msg' style='display: none'></div>
 <input type='submit' class='submitbtn' value='Agregar' >
 </form>
        </div>
@@ -64,7 +64,7 @@ function custom_submit_post() {
            
        $post_information = array(
             'post_title' => $titulo,
-            'post_description' => $descripcion,
+            'post_content' => $descripcion,
             'post_status' => 'publish',
             'post_author' => $userid,
             'post_type' => 'post',
@@ -72,13 +72,14 @@ function custom_submit_post() {
         
     $post_id = wp_insert_post( $post_information );
     if ( $post_id ) {
-        update_post_meta( $post_id, 'info', 'informacion' );
+        update_post_meta( $post_id, 'info', 'informacion' ); //Para Agregar postmeta luego de la inserccion del post
     }
     
     wp_die();
     }
     
     add_action( 'wp_ajax_custom_submit_post', 'custom_submit_post' );
+    add_action( 'wp_ajax_nopriv_custom_submit_post', 'custom_submit_post' ); //Necesario para usuarios no registrados
 
 
 ?>
